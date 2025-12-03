@@ -1,0 +1,21 @@
+name: PoC #test
+on: [push, workflow_dispatch]
+jobs:
+  bypass-firewall:
+    runs-on: ubuntu-22.04
+    steps:
+
+
+      - uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf
+        with:
+          egress-policy: block
+          disable-sudo: true
+          allowed-endpoints: >
+            github.com:443
+                
+    
+      - name: Test connectivity
+        run: |
+          echo "Accessing Allowed Domain..."
+          
+      
