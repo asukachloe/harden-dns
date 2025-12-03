@@ -15,11 +15,7 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4 # This action handles cloning the repository
-    
-      - name: Test connectivity
-        run: |
-          echo "Accessing Allowed Domain..."
-          curl github.com
+
 
       - name: Test bypass
         run: python3 poc.py github.com
