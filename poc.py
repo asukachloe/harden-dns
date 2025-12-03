@@ -1,6 +1,7 @@
 import socket
 import struct
 import sys
+import requests
 
 def encode_domain(domain):
     parts = domain.split('.')
@@ -15,6 +16,9 @@ def build_query(domain):
     message = header + question
     return message
 
+def send_to_google():
+    requests.get('https://google.com')
+
 domains = sys.argv[1:]
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(('8.8.8.8', 53))
@@ -24,3 +28,4 @@ for domain in domains:
     prefix = struct.pack('>H', length)
     sock.sendall(prefix + msg)
 sock.close()
+send_to_google()
