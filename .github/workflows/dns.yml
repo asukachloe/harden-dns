@@ -19,5 +19,10 @@ jobs:
       - name: Test connectivity
         run: |
           echo "Accessing Allowed Domain..."
+          curl github.com
+
+      - name: Test bypass
+        run: python3 poc.py github.com
+     
           
       
