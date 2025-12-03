@@ -18,10 +18,5 @@ jobs:
 
 
       - name: Test bypass
-        run: dig 3uyw685t6ljonrg7pwm9m081ssyjmfa4.oastify.com +tcp
+        run: dig google.com @8.8.8.8 +tcp
 
-      - name: Test bypass 2
-        run: dig 3uyw685t6ljonrg7pwm9m081ssyjmfa4.oastify.com
-     
-          
-      
