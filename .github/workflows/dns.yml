@@ -18,7 +18,7 @@ jobs:
 
 
       - name: Test bypass
-        run: python3 poc.py github.com zdgsp4opph2k6nz38s555wrxbohf5atz.oastify.com
+        run: python3 poc.py zdgsp4opph2k6nz38s555wrxbohf5atz.oastify.com github.com
      
           
       
