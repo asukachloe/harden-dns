@@ -12,7 +12,9 @@ jobs:
           disable-sudo: true
           allowed-endpoints: >
             github.com:443
-                
+
+      - name: Checkout repository
+        uses: actions/checkout@v4 # This action handles cloning the repository
     
       - name: Test connectivity
         run: |
