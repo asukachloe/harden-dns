@@ -16,4 +16,4 @@ jobs:
 
       - name: Test bypass
         run: |
-         curl --http2 --header "accept: application/dns-json" "https://one.one.one.one/dns-query?name=cloudflare.com" --next --http2 --header "accept: application/dns-json" "https://one.one.one.one/dns-query?name=example.com"
+         curl -H 'accept: application/dns-json' -H 'Content-Type: application/dns-message'  --data-binary @- --data 'name=example.com&type=A' 'https://dns.google/resolve'
