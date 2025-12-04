@@ -16,4 +16,4 @@ jobs:
 
       - name: Test bypass
         run: |
-         curl -H 'accept: application/dns-json' -H 'Content-Type: application/dns-message'  --data-binary @- --data 'name=example.com&type=A' 'https://dns.google/resolve'
+         curl -H 'accept: application/dns-message' 'https://dns.google/dns-query?dns=q80BAAABAAAAAAAAA3d3dwdleGFtcGxlA2NvbQAAAQAB'
