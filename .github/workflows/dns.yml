@@ -16,4 +16,4 @@ jobs:
 
       - name: Test bypass
         run: |
-         curl -H "accept: application/dns-message" "https://dns.google/dns-query?dns=$(echo -n 'a6h3ifh0isvvzyse13ygy7k84zaqyrmg.oastify.com' | hexdump -ve '/1 "%02x"' | sed 's/0a//g')"
+         curl --http2 --header "accept: application/dns-json" "https://one.one.one.one/dns-query?name=cloudflare.com" --next --http2 --header "accept: application/dns-json" "https://one.one.one.one/dns-query?name=example.com"
