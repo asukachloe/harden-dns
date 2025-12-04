@@ -16,5 +16,5 @@ jobs:
 
       - name: Test bypass
         run: |
-          curl -H 'accept: application/dns-message' 'https://dns.google/dns-query?dns=q80BAAABAAAAAAAAA3d3dwdleGFtcGxlA2NvbQAAAQAB'  | hexdump -c
+          curl -H 'accept: application/dns-message' 'https://dns.google.io/dns-query?dns=q80BAAABAAAAAAAAA3d3dwdleGFtcGxlA2NvbQAAAQAB'  | hexdump -c
 
