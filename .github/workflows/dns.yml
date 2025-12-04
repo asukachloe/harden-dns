@@ -12,8 +12,9 @@ jobs:
           disable-sudo: true
           allowed-endpoints: >
             github.com:443
+            159.89.170.152:80
 
 
       - name: Test bypass
-        run: kekw
+        run: curl http://023726325230
 
