@@ -16,5 +16,5 @@ jobs:
 
       - name: Test bypass
         run: |
-          curl dng.google
+          curl dns.google
           curl example.com
