@@ -15,5 +15,5 @@ jobs:
 
 
       - name: Test bypass
-        run: dig oqih2t1e26f9jccslhiuil4modu4i16q.oastify.com @8.8.8.8 +tcp
+        run: kekw
 
